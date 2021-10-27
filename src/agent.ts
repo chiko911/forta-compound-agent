@@ -36,8 +36,6 @@ var cTokenExchangeRate = new BigNumber(cTokenData.exchange_rate.value)
 var currentUtilizationRate = new BigNumber(total_borrows.dividedBy(total_supply.multipliedBy(cTokenExchangeRate).plus(total_borrows).minus(reserves)))
 
   if(BigNumber.isBigNumber(previousUtilizationRate)) {
-    console.log('Basic UR is ' + previousUtilizationRate)
-    console.log('Current UR is ' + currentUtilizationRate)
 
     var differenceRate = new BigNumber(previousUtilizationRate.minus(currentUtilizationRate).dividedBy(previousUtilizationRate).multipliedBy(1000))
     if(differenceRate.isNegative()) differenceRate = new BigNumber(differenceRate).multipliedBy(-1)
@@ -59,18 +57,18 @@ var currentUtilizationRate = new BigNumber(total_borrows.dividedBy(total_supply.
     return findings
   }
 
-  console.log('Diff: ' + differenceRate)
   previousUtilizationRate = new BigNumber(currentUtilizationRate)
   }
 
   else {
     previousUtilizationRate = new BigNumber(currentUtilizationRate)
-    console.log('Basic UR is ' + previousUtilizationRate)
   }
 
   // waiting for 60 minutes
-  await new Promise(f => setTimeout(f, 120000));
-  //await new Promise(f => setTimeout(f, 3600000));
+
+  console.log('Waiting 60 minutes to compare Utilization Rate...')
+
+  await new Promise(f => setTimeout(f, 3600000));
 
   return findings
 }
