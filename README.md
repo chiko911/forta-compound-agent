@@ -1,4 +1,4 @@
-# Utilization Rate Change Agent
+# Compound Utilization Rate Change Agent
 
 ## Description
 
